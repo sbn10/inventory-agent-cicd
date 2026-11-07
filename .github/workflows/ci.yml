@@ -39,3 +39,12 @@ jobs:
 
       - name: Push Docker image
         run: docker push ghcr.io/sbn10/inventory-agent-cicd:latest
+      
+  deploy:
+      needs: test
+      runs-on: [self-hosted, inventory-deploy]
+
+      steps:
+        - name: Check Docker on Windows
+          shell: powershell
+          run: docker info
